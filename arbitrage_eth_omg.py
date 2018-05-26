@@ -14,10 +14,10 @@ def initialize(context):
     # The context contains a new "exchanges" attribute which is a dictionary
     # of exchange objects by exchange name. This allow easy access to the
     # exchanges.
-    context.buying_exchange = context.exchanges['poloniex']
-    context.selling_exchange = context.exchanges['bitfinex']
+    context.buying_exchange = context.exchanges['binance']
+    context.selling_exchange = context.exchanges['bittrex']
 
-    context.trading_pair_symbol = 'eth_btc'
+    context.trading_pair_symbol = 'omg_eth'
     context.trading_pairs = dict()
 
     # Note the second parameter of the symbol() method
@@ -25,18 +25,18 @@ def initialize(context):
     # the exchange information. This allow all other operations using
     # the TradingPair to target the correct exchange.
     context.trading_pairs[context.buying_exchange] = \
-        symbol('eth_btc', context.buying_exchange.name)
+        symbol(context.trading_pair_symbol, context.buying_exchange.name)
 
     context.trading_pairs[context.selling_exchange] = \
         symbol(context.trading_pair_symbol, context.selling_exchange.name)
 
     context.entry_points = [
-        dict(gap=0.03, amount=0.05),
-        dict(gap=0.04, amount=0.1),
-        dict(gap=0.05, amount=0.5),
+        dict(gap=-0.05, amount=50),
     ]
     context.exit_points = [
-        dict(gap=-0.02, amount=0.5),
+        dict(gap=0.01, amount=10),
+        dict(gap=0.02, amount=20),
+        dict(gap=0.03, amount=30),
     ]
 
     context.SLIPPAGE_ALLOWED = 0.02
@@ -233,11 +233,11 @@ if __name__ == '__main__':
     MODE = 'live'
     if MODE == 'live':
         run_algorithm(
-            capital_base=0.1,
+            capital_base=10,
             initialize=initialize,
             handle_data=handle_data,
             analyze=analyze,
-            exchange_name='poloniex,bitfinex',
+            exchange_name='bitfinex,bittrex',
             live=True,
             algo_namespace=algo_namespace,
             quote_currency='btc',

@@ -4,7 +4,7 @@ from catalyst.api import (record, order, symbol, get_open_orders)
 from catalyst.exchange.utils.stats_utils import get_pretty_stats
 from catalyst.utils.run_algo import run_algorithm
 
-algo_namespace = 'arbitrage_eth_btc'
+algo_namespace = 'arbitrage_omg_eth'
 log = Logger(algo_namespace)
 
 

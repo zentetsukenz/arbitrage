@@ -4,7 +4,19 @@ from catalyst.api import (record, order, symbol, get_open_orders)
 from catalyst.exchange.utils.stats_utils import get_pretty_stats
 from catalyst.utils.run_algo import run_algorithm
 
-algo_namespace = 'arbitrage_omg_eth'
+# Trading pair setting
+base_currency = 'xlm'
+quote_currency = 'btc'
+trading_pair = '{base_currency}_{quote_currency}'.format(
+    base_currency=base_currency, quote_currency=quote_currency)
+capital_base = 1
+
+# Exchange setting
+buying_exchange = 'bittrex'
+selling_exchange = 'poloniex'
+
+# Log setting
+algo_namespace = 'arbitrage_{trading_pair}'.format(trading_pair=trading_pair)
 log = Logger(algo_namespace)
 
 
@@ -14,10 +26,10 @@ def initialize(context):
     # The context contains a new "exchanges" attribute which is a dictionary
     # of exchange objects by exchange name. This allow easy access to the
     # exchanges.
-    context.buying_exchange = context.exchanges['binance']
-    context.selling_exchange = context.exchanges['bittrex']
+    context.buying_exchange = context.exchanges[buying_exchange]
+    context.selling_exchange = context.exchanges[selling_exchange]
 
-    context.trading_pair_symbol = 'omg_eth'
+    context.trading_pair_symbol = trading_pair
     context.trading_pairs = dict()
 
     # Note the second parameter of the symbol() method
@@ -31,12 +43,12 @@ def initialize(context):
         symbol(context.trading_pair_symbol, context.selling_exchange.name)
 
     context.entry_points = [
-        dict(gap=-0.05, amount=50),
-    ]
-    context.exit_points = [
         dict(gap=0.01, amount=10),
         dict(gap=0.02, amount=20),
         dict(gap=0.03, amount=30),
+    ]
+    context.exit_points = [
+        dict(gap=-0.05, amount=50),
     ]
 
     context.SLIPPAGE_ALLOWED = 0.02
@@ -174,7 +186,10 @@ def handle_data(context, data):
     for exchange in context.trading_pairs:
         asset = context.trading_pairs[exchange]
 
-        orders = get_open_orders(asset)
+        orders = context.blotter.open_orders
+        # orders = get_open_orders(asset)
+        log.info('open orders for {exchange}: {orders}'.format(
+            exchange=exchange.name, orders=orders))
         if orders:
             log.info('found {order_count} open orders on {exchange_name} '
                      'skipping bar until all open orders execute'.format(
@@ -233,14 +248,17 @@ if __name__ == '__main__':
     MODE = 'live'
     if MODE == 'live':
         run_algorithm(
-            capital_base=10,
+            capital_base=capital_base,
             initialize=initialize,
             handle_data=handle_data,
             analyze=analyze,
-            exchange_name='bitfinex,bittrex',
+            exchange_name='{buying_exchange},{selling_exchange}'.format(
+                buying_exchange=buying_exchange,
+                selling_exchange=selling_exchange),
             live=True,
             algo_namespace=algo_namespace,
-            quote_currency='btc',
+            data_frequency='minute',
+            quote_currency=quote_currency,
             live_graph=False,
             simulate_orders=True,
             stats_output=None,

@@ -2,70 +2,142 @@ syntax = "proto3";
 
 package trading.arbitrage;
 
-/*
-Arbitrage service
-*/
+/**
+ * Arbitrage service. The general idea of the arbitrage is to buy at lower price
+ * and sell at high price. We can do this by watching over two exchanges for a
+ * price of a specific trading pair. If the price differs more than a defined
+ * gap, the algorithm should execute a trade command for a specific amount.
+ *
+ * The general rule of thumb for selecting an exchange for a trading pair is
+ * selecting an exchange that has the highest trading volume for that pair and
+ * exchange that has a moderate trading volume. Because the price of more massive
+ * exchange usually goes up or down first. Then, when the price is going up, we
+ * arbitrage on smaller exchange to gain profit.
+ */
 service ArbitrageService {
+        /**
+         * Set up a context for arbitrage. A client should call initialization
+         * first to prepare a data for trading.
+         */
         rpc Initialize (InitializeRequest) returns (InitializeResponse);
+
+        /**
+         * Handle each price candle. A client should call handle data for each
+         * price tick that client prefers.
+         */
         rpc HandleData (HandleDataRequest) returns (HandleDataResponse);
+
+        /**
+         * Analyze trading performance. A client should call analyze after handle
+         * data is complete for a performance matrix.
+         */
         rpc Analysis (AnalysisRequest) returns (AnalysisResponse);
 }
 
+/**
+ * A basic for all requests. Contain context for trading.
+ */
 message BasicRequest {
         Context context = 1;
 }
 
+/**
+ * A basic for all response. Contain context after process a request.
+ */
 message BasicResponse {
         Context context = 1;
 }
 
+/**
+ * Initialization request to define a trading context.
+ */
 message InitializeRequest {
         BasicRequest basic = 1;
 }
 
+/**
+ * Initialization response to a client for a complete trading context.
+ */
 message InitializeResponse {
         BasicResponse basic = 1;
 }
 
+/**
+ * A price tick data contains buying and selling exchange price data.
+ */
 message HandleDataRequest {
         BasicRequest basic = 1;
+
+        /**
+         * An exchange that a base currency should be brought using quote
+         * currency if the command is "enter."
+         */
         ExchangeData buying_exchange = 2;
+
+        /**
+         * An exchange that a base currency should be sold to gain quote currency
+         * if the command is "exit."
+         */
         ExchangeData selling_exchange = 3;
 }
 
+/**
+ * A response return after process price candle. A command for trading is
+ * included for a client to execute.
+ */
 message HandleDataResponse {
         BasicResponse basic = 1;
         Command command = 2;
 }
 
+/**
+ * TBD
+ */
 message AnalysisRequest {
         BasicRequest basic = 1;
 }
 
+/**
+ * TBD
+ */
 message AnalysisResponse {
         BasicResponse basic = 1;
 }
 
+/**
+ * An arbitrage context. Contain information about buying/selling exchange and
+ * current arbitrage state.
+ */
 message Context {
         string buying_exchange = 1;
         string selling_exchange = 2;
         string trading_pair = 3;
-        repeated TradingPoint entry_points = 4;
-        repeated TradingPoint exit_points = 5;
+        repeated TradingPoint entry_points = 4; // Positive gap
+        repeated TradingPoint exit_points = 5; // Negative gap
         float slippage_allowance = 6;
 }
 
+/**
+ * A gap and amount of base currency that client should buy or sell if the price
+ * reaches the gap.
+ */
 message TradingPoint {
         float gap = 1;
         float amount = 2;
 }
 
+/**
+ * An exchange data for a specific time.
+ */
 message ExchangeData {
         string name = 1;
         string trading_pair = 2;
         BarData data = 3;
 }
 
+/**
+ * A price candle data for an exchange. 
+ */
 message BarData {
         float open = 1;
         float close = 2;
@@ -74,6 +146,11 @@ message BarData {
         float volume = 5;
 }
 
+/**
+ * A Command issues to a client. Possible values are "enter," "exit" and "none"
+ * indicating that client shouldn't do anything. An amount and buy/sell price is
+ * also provided.
+ */
 message Command {
         enum Action {
              NONE = 0;

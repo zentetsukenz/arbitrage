@@ -32,7 +32,7 @@ gen/trading/arbitrage/elixir/arbituer.pb.ex:
 
 # Document =====
 
-doc: gen/trading/arbitrage/doc gen/trading/arbitrage/doc/index.html
+doc: gen/trading/arbitrage/doc gen/trading/arbitrage/doc/index.html index.html
 
 gen/trading/arbitrage/doc:
 	mkdir -p gen/trading/arbitrage/doc
@@ -42,6 +42,9 @@ gen/trading/arbitrage/doc/index.html:
 		-v $(workdir)/gen/trading/arbitrage/doc:/out \
 		-v $(workdir):/protos \
 		pseudomuto/protoc-gen-doc
+
+index.html: gen/trading/arbitrage/doc/index.html
+	cp gen/trading/arbitrage/doc/index.html index.html
 
 # Utils =====
 

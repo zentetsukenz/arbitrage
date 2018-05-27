@@ -14,7 +14,7 @@ The flow is similar to what [catalyst](https://github.com/enigmampc/catalyst) is
 
 # Document
 
-Please visit [document](https://zentetsukenz.github.io/arbituer)
+Please visit [document](https://zentetsukenz.github.io/arbituer/)
 
 # Usage
 

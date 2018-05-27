@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package trading.arbitrage;
+
+service ArbitrageService {
+        rpc Initialize (InitializeRequest) returns (InitializeResponse);
+        rpc HandleData (HandleDataRequest) returns (HandleDataResponse);
+        rpc Analysis (AnalysisRequest) returns (AnalysisResponse);
+}
+
+message BasicRequest {
+        Context context = 1;
+}
+
+message BasicResponse {
+        Context context = 1;
+}
+
+message InitializeRequest {
+        BasicRequest basic = 1;
+}
+
+message InitializeResponse {
+        BasicResponse basic = 1;
+}
+
+message HandleDataRequest {
+        BasicRequest basic = 1;
+        ExchangeData buying_exchange = 2;
+        ExchangeData selling_exchange = 3;
+}
+
+message HandleDataResponse {
+        BasicResponse basic = 1;
+        Command command = 2;
+}
+
+message AnalysisRequest {
+        BasicRequest basic = 1;
+}
+
+message AnalysisResponse {
+        BasicResponse basic = 1;
+}
+
+message Context {
+        string buying_exchange = 1;
+        string selling_exchange = 2;
+        string trading_pair = 3;
+        repeated TradingPoint entry_points = 4;
+        repeated TradingPoint exit_points = 5;
+        float slippage_allowance = 6;
+}
+
+message TradingPoint {
+        float gap = 1;
+        float amount = 2;
+}
+
+message ExchangeData {
+        string name = 1;
+        string trading_pair = 2;
+        BarData data = 3;
+}
+
+message BarData {
+        float open = 1;
+        float close = 2;
+        float high = 3;
+        float low = 4;
+        float volume = 5;
+}
+
+message Command {
+        enum Action {
+             NONE = 0;
+             ENTER = 1;
+             EXIT = 2;
+        }
+        Action action = 1;
+        float amount = 2;
+        float buying_price = 3;
+        float selling_price = 4;
+}

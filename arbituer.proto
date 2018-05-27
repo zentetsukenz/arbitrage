@@ -114,7 +114,7 @@ message Context {
         TradingPair trading_pair = 3;
         repeated TradingPoint entry_points = 4; // Positive gap
         repeated TradingPoint exit_points = 5; // Negative gap
-        float slippage_allowance = 6;
+        double slippage_allowance = 6;
 }
 
 /**
@@ -143,8 +143,8 @@ message TradingPair {
  * reaches the gap.
  */
 message TradingPoint {
-        float gap = 1;
-        float amount = 2;
+        double gap = 1;
+        double amount = 2;
 }
 
 /**
@@ -162,11 +162,11 @@ message ExchangeData {
  * simply "0.01 eth / 1 omg."
  */
 message BarData {
-        float open = 1;
-        float close = 2;
-        float high = 3;
-        float low = 4;
-        float volume = 5;
+        double open = 1;
+        double close = 2;
+        double high = 3;
+        double low = 4;
+        double volume = 5;
 }
 
 /**
@@ -181,7 +181,7 @@ message Command {
              EXIT = 2;
         }
         Action action = 1;
-        float amount = 2; // Base currency amount to buy and sell.
-        float buying_price = 3;
-        float selling_price = 4;
+        double amount = 2; // Base currency amount to buy and sell.
+        double buying_price = 3;
+        double selling_price = 4;
 }

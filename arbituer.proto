@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package trading.arbitrage;
 
+/*
+Arbitrage service
+*/
 service ArbitrageService {
         rpc Initialize (InitializeRequest) returns (InitializeResponse);
         rpc HandleData (HandleDataRequest) returns (HandleDataResponse);

@@ -111,10 +111,31 @@ message AnalysisResponse {
 message Context {
         string buying_exchange = 1;
         string selling_exchange = 2;
-        string trading_pair = 3;
+        TradingPair trading_pair = 3;
         repeated TradingPoint entry_points = 4; // Positive gap
         repeated TradingPoint exit_points = 5; // Negative gap
         float slippage_allowance = 6;
+}
+
+/**
+ * A current trading pair. Base currency and Quote currency format are used to
+ * describe the trading pair.
+ *
+ * For example, a trading pair omg_eth, it means that we are trading "omg" using
+ * "eth" as a quote asset.
+ */
+message TradingPair {
+        /**
+         * A currency that we are going to transact on. In other words, it is the
+         * currency that we are trading.
+         */
+        string base_currency = 1; // Lower case string.
+
+        /**
+         * A currency that is used to buy a base currency. We gain the quote
+         * currency after executing sell command on the trading pair.
+         */
+        string quote_currency = 2; // Lower case string.
 }
 
 /**
@@ -127,16 +148,18 @@ message TradingPoint {
 }
 
 /**
- * An exchange data for a specific time.
+ * An exchange data at a specific time.
  */
 message ExchangeData {
         string name = 1;
-        string trading_pair = 2;
-        BarData data = 3;
+        BarData data = 2;
 }
 
 /**
- * A price candle data for an exchange. 
+ * A price candle data for an exchange. The value depends on the trading pair.
+ * For example, if the trading pair is omg_eth and the value is 0.01. We can read
+ * it as "We can use 0.01 eth to buy 1 omg" or "1 omg is worth 0.01 eth" or
+ * simply "0.01 eth / 1 omg."
  */
 message BarData {
         float open = 1;
@@ -158,7 +181,7 @@ message Command {
              EXIT = 2;
         }
         Action action = 1;
-        float amount = 2;
+        float amount = 2; // Base currency amount to buy and sell.
         float buying_price = 3;
         float selling_price = 4;
 }

@@ -18,7 +18,18 @@ log = Logger('arbitrage')
 
 
 class ArbitrageServiceServicer(arbitrage_pb2_grpc.ArbitrageServiceServicer):
-    pass
+    def Initialize(self, request, context):
+
+        context = arbitrage_pb2.Context(
+            buying_exchange=request.buying_exchange,
+            selling_exchange=request.selling_exchange,
+            trading_pair=request.trading_pair,
+            enter_points=request.enter_points,
+            exit_points=request.exit_points,
+            slippage_allowance=request.slippage_allowance)
+
+        return arbitrage_pb2.InitializeResponse(
+            basic=arbitrage_pb2.BasicResponse(), context=context)
 
 
 def serve():

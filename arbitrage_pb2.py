@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='arbitrage.proto',
   package='trading.arbitrage',
   syntax='proto3',
-  serialized_pb=_b('\n\x0f\x61rbitrage.proto\x12\x11trading.arbitrage\x1a\x17messages/exchange.proto\x1a\x1bmessages/trading_pair.proto\"\x0e\n\x0c\x42\x61sicRequest\"\x0f\n\rBasicResponse\"\xec\x02\n\x11InitializeRequest\x12.\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32\x1f.trading.arbitrage.BasicRequest\x12\x33\n\x0f\x62uying_exchange\x18\x02 \x01(\x0b\x32\x1a.trading.messages.Exchange\x12\x34\n\x10selling_exchange\x18\x03 \x01(\x0b\x32\x1a.trading.messages.Exchange\x12\x33\n\x0ctrading_pair\x18\x04 \x01(\x0b\x32\x1d.trading.messages.TradingPair\x12\x35\n\x0c\x65nter_points\x18\x05 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x34\n\x0b\x65xit_points\x18\x06 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x1a\n\x12slippage_allowance\x18\x07 \x01(\x01\"r\n\x12InitializeResponse\x12/\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32 .trading.arbitrage.BasicResponse\x12+\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.Context\"\xe5\x01\n\x11HandleDataRequest\x12.\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32\x1f.trading.arbitrage.BasicRequest\x12+\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.Context\x12\x38\n\x0f\x62uying_exchange\x18\x03 \x01(\x0b\x32\x1f.trading.arbitrage.ExchangeData\x12\x39\n\x10selling_exchange\x18\x04 \x01(\x0b\x32\x1f.trading.arbitrage.ExchangeData\"r\n\x12HandleDataResponse\x12/\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32 .trading.arbitrage.BasicResponse\x12+\n\x07\x63ommand\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.Command\"A\n\x0f\x41nalysisRequest\x12.\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32\x1f.trading.arbitrage.BasicRequest\"C\n\x10\x41nalysisResponse\x12/\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32 .trading.arbitrage.BasicResponse\"\xfa\x01\n\x07\x43ontext\x12\x17\n\x0f\x62uying_exchange\x18\x01 \x01(\t\x12\x18\n\x10selling_exchange\x18\x02 \x01(\t\x12\x33\n\x0ctrading_pair\x18\x03 \x01(\x0b\x32\x1d.trading.messages.TradingPair\x12\x35\n\x0c\x65ntry_points\x18\x04 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x34\n\x0b\x65xit_points\x18\x05 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x1a\n\x12slippage_allowance\x18\x06 \x01(\x01\"+\n\x0cTradingPoint\x12\x0b\n\x03gap\x18\x01 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\"F\n\x0c\x45xchangeData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12(\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.BarData\"Q\n\x07\x42\x61rData\x12\x0c\n\x04open\x18\x01 \x01(\x01\x12\r\n\x05\x63lose\x18\x02 \x01(\x01\x12\x0c\n\x04high\x18\x03 \x01(\x01\x12\x0b\n\x03low\x18\x04 \x01(\x01\x12\x0e\n\x06volume\x18\x05 \x01(\x01\"\xa2\x01\n\x07\x43ommand\x12\x31\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32!.trading.arbitrage.Command.Action\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\x12\x14\n\x0c\x62uying_price\x18\x03 \x01(\x01\x12\x15\n\rselling_price\x18\x04 \x01(\x01\"\'\n\x06\x41\x63tion\x12\x08\n\x04NONE\x10\x00\x12\t\n\x05\x45NTER\x10\x01\x12\x08\n\x04\x45XIT\x10\x02\x32\x9d\x02\n\x10\x41rbitrageService\x12Y\n\nInitialize\x12$.trading.arbitrage.InitializeRequest\x1a%.trading.arbitrage.InitializeResponse\x12Y\n\nHandleData\x12$.trading.arbitrage.HandleDataRequest\x1a%.trading.arbitrage.HandleDataResponse\x12S\n\x08\x41nalysis\x12\".trading.arbitrage.AnalysisRequest\x1a#.trading.arbitrage.AnalysisResponseb\x06proto3')
+  serialized_pb=_b('\n\x0f\x61rbitrage.proto\x12\x11trading.arbitrage\x1a\x17messages/exchange.proto\x1a\x1bmessages/trading_pair.proto\"\x0e\n\x0c\x42\x61sicRequest\"\x0f\n\rBasicResponse\"\xec\x02\n\x11InitializeRequest\x12.\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32\x1f.trading.arbitrage.BasicRequest\x12\x33\n\x0f\x62uying_exchange\x18\x02 \x01(\x0b\x32\x1a.trading.messages.Exchange\x12\x34\n\x10selling_exchange\x18\x03 \x01(\x0b\x32\x1a.trading.messages.Exchange\x12\x33\n\x0ctrading_pair\x18\x04 \x01(\x0b\x32\x1d.trading.messages.TradingPair\x12\x35\n\x0c\x65nter_points\x18\x05 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x34\n\x0b\x65xit_points\x18\x06 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x1a\n\x12slippage_allowance\x18\x07 \x01(\x01\"r\n\x12InitializeResponse\x12/\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32 .trading.arbitrage.BasicResponse\x12+\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.Context\"\xe5\x01\n\x11HandleDataRequest\x12.\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32\x1f.trading.arbitrage.BasicRequest\x12+\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.Context\x12\x38\n\x0f\x62uying_exchange\x18\x03 \x01(\x0b\x32\x1f.trading.arbitrage.ExchangeData\x12\x39\n\x10selling_exchange\x18\x04 \x01(\x0b\x32\x1f.trading.arbitrage.ExchangeData\"r\n\x12HandleDataResponse\x12/\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32 .trading.arbitrage.BasicResponse\x12+\n\x07\x63ommand\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.Command\"A\n\x0f\x41nalysisRequest\x12.\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32\x1f.trading.arbitrage.BasicRequest\"C\n\x10\x41nalysisResponse\x12/\n\x05\x62\x61sic\x18\x01 \x01(\x0b\x32 .trading.arbitrage.BasicResponse\"\xb2\x02\n\x07\x43ontext\x12\x33\n\x0f\x62uying_exchange\x18\x01 \x01(\x0b\x32\x1a.trading.messages.Exchange\x12\x34\n\x10selling_exchange\x18\x02 \x01(\x0b\x32\x1a.trading.messages.Exchange\x12\x33\n\x0ctrading_pair\x18\x03 \x01(\x0b\x32\x1d.trading.messages.TradingPair\x12\x35\n\x0c\x65ntry_points\x18\x04 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x34\n\x0b\x65xit_points\x18\x05 \x03(\x0b\x32\x1f.trading.arbitrage.TradingPoint\x12\x1a\n\x12slippage_allowance\x18\x06 \x01(\x01\"+\n\x0cTradingPoint\x12\x0b\n\x03gap\x18\x01 \x01(\x01\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\"F\n\x0c\x45xchangeData\x12\x0c\n\x04name\x18\x01 \x01(\t\x12(\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x1a.trading.arbitrage.BarData\"Q\n\x07\x42\x61rData\x12\x0c\n\x04open\x18\x01 \x01(\x01\x12\r\n\x05\x63lose\x18\x02 \x01(\x01\x12\x0c\n\x04high\x18\x03 \x01(\x01\x12\x0b\n\x03low\x18\x04 \x01(\x01\x12\x0e\n\x06volume\x18\x05 \x01(\x01\"\xa2\x01\n\x07\x43ommand\x12\x31\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32!.trading.arbitrage.Command.Action\x12\x0e\n\x06\x61mount\x18\x02 \x01(\x01\x12\x14\n\x0c\x62uying_price\x18\x03 \x01(\x01\x12\x15\n\rselling_price\x18\x04 \x01(\x01\"\'\n\x06\x41\x63tion\x12\x08\n\x04NONE\x10\x00\x12\t\n\x05\x45NTER\x10\x01\x12\x08\n\x04\x45XIT\x10\x02\x32\x9d\x02\n\x10\x41rbitrageService\x12Y\n\nInitialize\x12$.trading.arbitrage.InitializeRequest\x1a%.trading.arbitrage.InitializeResponse\x12Y\n\nHandleData\x12$.trading.arbitrage.HandleDataRequest\x1a%.trading.arbitrage.HandleDataResponse\x12S\n\x08\x41nalysis\x12\".trading.arbitrage.AnalysisRequest\x1a#.trading.arbitrage.AnalysisResponseb\x06proto3')
   ,
   dependencies=[messages_dot_exchange__pb2.DESCRIPTOR,messages_dot_trading__pair__pb2.DESCRIPTOR,])
 
@@ -48,8 +48,8 @@ _COMMAND_ACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1669,
-  serialized_end=1708,
+  serialized_start=1725,
+  serialized_end=1764,
 )
 _sym_db.RegisterEnumDescriptor(_COMMAND_ACTION)
 
@@ -374,15 +374,15 @@ _CONTEXT = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='buying_exchange', full_name='trading.arbitrage.Context.buying_exchange', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='selling_exchange', full_name='trading.arbitrage.Context.selling_exchange', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -427,7 +427,7 @@ _CONTEXT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1093,
-  serialized_end=1343,
+  serialized_end=1399,
 )
 
 
@@ -464,8 +464,8 @@ _TRADINGPOINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1345,
-  serialized_end=1388,
+  serialized_start=1401,
+  serialized_end=1444,
 )
 
 
@@ -502,8 +502,8 @@ _EXCHANGEDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1390,
-  serialized_end=1460,
+  serialized_start=1446,
+  serialized_end=1516,
 )
 
 
@@ -561,8 +561,8 @@ _BARDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1462,
-  serialized_end=1543,
+  serialized_start=1518,
+  serialized_end=1599,
 )
 
 
@@ -614,8 +614,8 @@ _COMMAND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1546,
-  serialized_end=1708,
+  serialized_start=1602,
+  serialized_end=1764,
 )
 
 _INITIALIZEREQUEST.fields_by_name['basic'].message_type = _BASICREQUEST
@@ -634,6 +634,8 @@ _HANDLEDATARESPONSE.fields_by_name['basic'].message_type = _BASICRESPONSE
 _HANDLEDATARESPONSE.fields_by_name['command'].message_type = _COMMAND
 _ANALYSISREQUEST.fields_by_name['basic'].message_type = _BASICREQUEST
 _ANALYSISRESPONSE.fields_by_name['basic'].message_type = _BASICRESPONSE
+_CONTEXT.fields_by_name['buying_exchange'].message_type = messages_dot_exchange__pb2._EXCHANGE
+_CONTEXT.fields_by_name['selling_exchange'].message_type = messages_dot_exchange__pb2._EXCHANGE
 _CONTEXT.fields_by_name['trading_pair'].message_type = messages_dot_trading__pair__pb2._TRADINGPAIR
 _CONTEXT.fields_by_name['entry_points'].message_type = _TRADINGPOINT
 _CONTEXT.fields_by_name['exit_points'].message_type = _TRADINGPOINT
@@ -754,8 +756,8 @@ _ARBITRAGESERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=1711,
-  serialized_end=1996,
+  serialized_start=1767,
+  serialized_end=2052,
   methods=[
   _descriptor.MethodDescriptor(
     name='Initialize',
